@@ -9,7 +9,10 @@ public class Main {
       File directory = new File(args[i]); // directory path
       if (directory.exists() && directory.isDirectory()) { // check if directory
         File[] fileList = directory.listFiles(); // list files inside directory
-        RecZip(service, fileList, directory);
+        if (fileList.length == 0) 
+          System.err.println("'" + directory + "'" + " is an empty directory!");
+        else 
+          RecZip(service, fileList, directory);
       }
       else {
         System.err.println("'" + directory + "'" + " isn't a directory!");
