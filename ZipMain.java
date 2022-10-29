@@ -25,10 +25,9 @@ public class ZipMain {
   public static void RecZip(ExecutorService service, File[] listDir, File stdDir) {
     for (File file : listDir) {
       if (file.isFile()) { // check if is file 
-        if (!file.getName().endsWith(".zip")) { // check if it's already a zipped file
+        if (!file.getName().endsWith(".zip") || !file.getName().endsWith(".gz")) { // check if it's already a zipped file
           String filePath = file.getAbsolutePath(); // current file path
-          String fileName = file.getName(); // current file name
-          String destination = fileName.substring(0, fileName.lastIndexOf('.')) + ".zip"; // zipped file destination
+          String destination = file.getName() + ".gz"; // zipped file destination
           ZipThread zippedFile = new ZipThread(filePath, stdDir + "\\" + destination); // create zipped file
           service.execute(zippedFile); // starting thread of ThreadPool
         }
